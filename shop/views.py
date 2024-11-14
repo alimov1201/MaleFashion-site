@@ -7,8 +7,10 @@ def shop(request):
     search = request.GET.get('search')
     category = request.GET.get('category')
     if category:
-        products = Product.objects.filter(category=category)
-    elif search:
+        products = Product.objects.filter(category__name=category)
+    elif category == None:
+        products = Product.objects.all()
+    if search:
         products = Product.objects.filter(name__icontains=search)
     else:
         products = Product.objects.all()

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static  %}
+{% load static %}
 <html lang="zxx">
 
 <head>
@@ -109,9 +109,11 @@
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a href="{% url 'home' %}" class="search-switch"><img src="{% static 'img/icon/search.png' %}" alt=""></a>
+                        <a href="{% url 'home' %}" class="search-switch"><img src="{% static 'img/icon/search.png' %}"
+                                alt=""></a>
                         <a href="{% url 'home' %}"><img src="{% static 'img/icon/heart.png' %}" alt=""></a>
-                        <a href="{% url 'home' %}"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>0</span></a>
+                        <a href="{% url 'home' %}"><img src="{% static 'img/icon/cart.png' %}" alt="">
+                            <span>0</span></a>
                         <div class="price">$0.00</div>
                     </div>
                 </div>
@@ -133,7 +135,8 @@
                                 <h2>Fall - Winter Collections 2030</h2>
                                 <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
                                     commitment to exceptional quality.</p>
-                                <a href="{% url 'shop' %}" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                                <a href="{% url 'shop' %}" class="primary-btn">Shop now <span
+                                        class="arrow_right"></span></a>
                                 <div class="hero__social">
                                 </div>
                             </div>
@@ -150,7 +153,8 @@
                                 <h2>Fall - Winter Collections 2030</h2>
                                 <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
                                     commitment to exceptional quality.</p>
-                                <a href="{% url 'shop' %}" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                                <a href="{% url 'shop' %}" class="primary-btn">Shop now <span
+                                        class="arrow_right"></span></a>
                                 <div class="hero__social">
                                 </div>
                             </div>
@@ -166,39 +170,45 @@
     <section class="banner spad">
         <div class="container">
             <div class="row">
+                {% if products|length > 0 %}
                 <div class="col-lg-7 offset-lg-4">
                     <div class="banner__item">
                         <div class="banner__item__pic">
-                            <img src="{% static 'img/banner/banner-1.jpg' %}" alt="">
+                            <img src="{{ products.0.image.url }}" alt="">
                         </div>
                         <div class="banner__item__text">
-                            <h2>Clothing Collections 2030</h2>
+                            <h2>{{ products.0.name }}</h2>
                             <a href="{% url 'shop' %}">Shop now</a>
                         </div>
                     </div>
                 </div>
+                {% endif %}
+                {% if products|length > 1 %}
                 <div class="col-lg-5">
                     <div class="banner__item banner__item--middle">
                         <div class="banner__item__pic">
-                            <img src="{% static 'img/banner/banner-2.jpg' %}" alt="">
+                            <img src="{{ products.1.image.url }}" alt="">
                         </div>
                         <div class="banner__item__text">
-                            <h2>Accessories</h2>
+                            <h2>{{ products.1.name }}</h2>
                             <a href="{% url 'shop' %}">Shop now</a>
                         </div>
                     </div>
                 </div>
+                {% endif %}
+                {% if products|length > 2 %}
                 <div class="col-lg-7">
                     <div class="banner__item banner__item--last">
                         <div class="banner__item__pic">
-                            <img src="{% static 'img/banner/banner-3.jpg' %}" alt="">
+                            <img src="{{ products.2.image.url }}" alt="">
                         </div>
                         <div class="banner__item__text">
-                            <h2>Shoes Spring 2030</h2>
+                            <h2>{{ products.2.name }}</h2>
                             <a href="{% url 'shop' %}">Shop now</a>
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
     </section>
@@ -222,7 +232,7 @@
                         </div>
                         <div class="product__item__text">
                             <h6>{{product.name}}</h6>
-                            <a href="{% url 'shop' %}" class="add-cart"> + Show more</a>
+                            <a href="{% url 'product_detail' product.id %}" class="add-cart"> + Show more</a>
                             <div class="rating">
                             </div>
                             <h5>{{product.price}}</h5>

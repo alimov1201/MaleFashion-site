@@ -8,6 +8,9 @@ class Article(models.Model):
     image = models.ImageField(upload_to='blog_images')
     created_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 
 
 class Comment(models.Model):
@@ -21,5 +24,11 @@ class Contact(models.Model):
     email = models.EmailField()
     text = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 class Email(models.Model):
     email = models.EmailField()
+
+    def __str__(self):
+        return self.email

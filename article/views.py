@@ -5,7 +5,7 @@ from article.forms import CommentForm, ContactForm, EmailField
 from shop.models import Product
 
 def home(request):
-    top_products = Product.objects.all()[:3]
+    products = Product.objects.all()
     new_products = Product.objects.order_by('-id')[:8]
     latest_articles = Article.objects.order_by('-id')[:3]
     emailform = EmailField()
@@ -15,7 +15,7 @@ def home(request):
             emailform.save()
     context = {
         'emailform': emailform,
-        'top_products': top_products,
+        'products': products,
         'new_products': new_products,
         'latest_articles': latest_articles
     }
@@ -49,6 +49,7 @@ def article_detail(request, id):
             comment = form.save(commit=False)
             comment.author = request.user
             comment.article = article
+            comment.save()
     emailform = EmailField()
     if request.method == 'POST':
         emailform = EmailField(request.POST)
